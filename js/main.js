@@ -74,6 +74,9 @@ async function handleFormSubmit(event){
     let countryInfo = await getCountryInfo(countryName);
     console.log(countryInfo);
 
+    // Execute the buildCountryCard function with Country Info
+    buildCountryCard(countryInfo);
+
     // Clear the input box at end
     event.target.countryName.value = '';
 }
@@ -89,4 +92,50 @@ async function getCountryInfo(countryName){
     };
 };
 
+
+// Function that will take in a country info object and create a card 
+function buildCountryCard(countryObj){
+    
+    // Build a card with country info
+    let card = document.createElement('div');
+    card.className = 'card h-100';
+
+    // Create an image for the flag
+    let image = document.createElement('img');
+    image.className = 'card-img-top';
+    image.src = countryObj.flags.png;
+    // Add the image to card
+    card.append(image);
+
+    // Create card body
+    let cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    // Create country name and population elements
+    let countryTitle = document.createElement('h5');
+    countryTitle.innerHTML = countryObj.name.official;
+    countryTitle.className = 'card-title';
+
+    let countryPopulation = document.createElement('p');
+    countryPopulation.innerHTML =  `Population: ${countryObj.population.toLocaleString('en-US')}`;
+    countryPopulation.className = 'card-text';
+
+    // Add title and pop to cardbody
+    cardBody.append(countryTitle);
+    cardBody.append(countryPopulation);
+
+    // Add card to card body
+    card.append(cardBody);
+
+    // Create a column for the card
+    let col = document.createElement('div');
+    col.className = 'col-12 col-md-6 col-lg-3 my-3';
+
+    // Add the card to the column
+    col.append(card);
+
+    // Get the country display row and add the column
+    let countryDisplay = document.getElementById('countryDisplay');
+    countryDisplay.prepend(col);
+}
 
