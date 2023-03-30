@@ -15,6 +15,16 @@ colorButtons.forEach((button, index) => {
     button.className = `btn btn-${colors[index]}`;
 });
 
+// Add a click event listener to each button to change the background of the body
+
+colorButtons.forEach((button,  index) => {
+    button.addEventListener('click', (e) => {
+        console.log(e);
+        let body = document.body;
+        body.className = `bg-${colors[index]}`;
+    });
+});
+
 
 // Create a new header and add it under the buttons in the container
 
@@ -41,6 +51,14 @@ function changeTextColor(e){
 };
 
 newHeader.addEventListener('mouseover', changeTextColor);
+
+function changeInnerText(event){
+    let newText = prompt('What should go in the text?')
+    let element = event.target;
+    element.innerHTML = newText;
+};
+
+newHeader.addEventListener('click', changeInnerText);
 
 
 
