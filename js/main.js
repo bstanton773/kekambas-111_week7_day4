@@ -63,18 +63,30 @@ newHeader.addEventListener('click', changeInnerText);
 
 // Grab the form
 let form = document.getElementById('countryForm');
+form.addEventListener('submit', handleFormSubmit);
 
-function handleFormSubmit(event){
+async function handleFormSubmit(event){
     event.preventDefault(); // Prevent the event from making a new get request and refreshing page
     // console.log(event);
     let countryName = event.target.countryName.value;
     console.log(countryName);
 
+    let countryInfo = await getCountryInfo(countryName);
+    console.log(countryInfo);
+
     // Clear the input box at end
     event.target.countryName.value = '';
 }
 
-form.addEventListener('submit', handleFormSubmit);
 
+async function getCountryInfo(countryName){
+    try{
+        let response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+        let data = await response.json();
+        return data[0];
+    } catch(err){
+        console.error(err);
+    };
+};
 
 
