@@ -3,11 +3,11 @@
 // Create an array for colors (Based on the Bootstrap Color Scheme)
 
 let colors = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
-console.log(colors);
+// console.log(colors);
 
 // Get the color buttons
 let colorButtons = document.querySelectorAll('.col-2 > button');
-console.log(colorButtons);
+// console.log(colorButtons);
 
 // For each button in the button colors, apply the button color class name
 colorButtons.forEach((button, index) => {
@@ -19,7 +19,7 @@ colorButtons.forEach((button, index) => {
 
 colorButtons.forEach((button,  index) => {
     button.addEventListener('click', (e) => {
-        console.log(e);
+        // console.log(e);
         let body = document.body;
         body.className = `bg-${colors[index]}`;
     });
@@ -33,7 +33,7 @@ newHeader.id = 'my-header';
 newHeader.className = 'text-center mt-3';
 newHeader.innerHTML = 'Created by Brian with the help of JavaScript';
 newHeader.style.color = 'black';
-console.log(newHeader);
+// console.log(newHeader);
 
 let colorButtonRow = document.getElementsByClassName('row')[1];
 // console.log(colorButtonRow);
@@ -59,6 +59,22 @@ function changeInnerText(event){
 };
 
 newHeader.addEventListener('click', changeInnerText);
+
+
+// Grab the form
+let form = document.getElementById('countryForm');
+
+function handleFormSubmit(event){
+    event.preventDefault(); // Prevent the event from making a new get request and refreshing page
+    // console.log(event);
+    let countryName = event.target.countryName.value;
+    console.log(countryName);
+
+    // Clear the input box at end
+    event.target.countryName.value = '';
+}
+
+form.addEventListener('submit', handleFormSubmit);
 
 
 
